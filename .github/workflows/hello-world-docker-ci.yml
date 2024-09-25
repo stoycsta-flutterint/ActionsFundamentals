@@ -1,4 +1,4 @@
-name: 02 - CI Build for Docker Action
+name: CI Build for Docker Action
 on:
   push:
     branches: [ main ]
@@ -14,14 +14,9 @@ jobs:
 
       - name: Run my own container action
         id: hello-action
-        uses: ./.github/actions/hello-world-action
+        uses: ./hello-world-docker-action
         with:
-          who-to-greet: '@aatmmr'
+          who-to-greet: '@wulfland'
 
       - name: Output time set in the container
         run: echo "The time was ${{ steps.hello-action.outputs.time }} when the action said hello"
-        
-      - name: Write Summary Output
-        run: | 
-          echo "## Demo Summary Output :rocket:" >> $GITHUB_STEP_SUMMARY
-          echo "The `time` from out custom action is ${{ steps.hello-action.outputs.time }}" >> $GITHUB_STEP_SUMMARY
