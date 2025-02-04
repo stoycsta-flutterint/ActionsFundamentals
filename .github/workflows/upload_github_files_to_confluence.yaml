@@ -20,15 +20,14 @@ env:
 
 jobs:
   runs-on: ubuntu-latest
-    steps:
-      - name: Checkout this repository
-        uses: actions/checkout@v4
+    - name: Checkout this repository
+      uses: actions/checkout@v4
     
-      - name: Uploads file to Confluence
-        uses: cupcakearmy/confluence-markdown-sync@v1
-        with:
-          from: '.github/workflows/upload_github_files_to_confluence.yml'
-          to: '891098311'
-          cloud: 'https://confluence.pyrsoftware.ca/confluence/rest/api'
-          user: ${{ secrets.CONFLUENCE_EMAIL }}
-          token: ${{ secrets.CONFLUENCE_TOKEN }}
+    - name: Uploads file to Confluence
+      uses: cupcakearmy/confluence-markdown-sync@v1
+      with:
+        from: '.github/workflows/upload_github_files_to_confluence.yml'
+        to: '891098311'
+        cloud: 'https://confluence.pyrsoftware.ca/confluence/rest/api'
+        user: ${{ secrets.CONFLUENCE_EMAIL }}
+        token: ${{ secrets.CONFLUENCE_TOKEN }}
