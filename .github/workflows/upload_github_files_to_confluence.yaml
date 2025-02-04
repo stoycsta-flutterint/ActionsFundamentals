@@ -1,0 +1,34 @@
+name: Upload GitHub file to Confluence
+permissions:
+  contents: read # required to check out the code from the repo
+  id-token: write # required to use OIDC authentication
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # you can edit this per your requirements
+  push:
+    branches:
+      - 'main' #add the branch name
+  workflow_dispatch:
+
+env:
+  CONF_REPO: <add-repo-name-here>
+  CONF_REPO_ORG: FlutterInt
+  REPO_DATA_PATH: .github/workflows/upload_github_files_to_confluence.yml
+  CONFLUENCE_REST_API: https://confluence.pyrsoftware.ca/confluence/rest/api
+  CONFLUENCE_PAGE_ID: 891098311
+
+jobs:
+  runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+    
+      - name: Uploads file to Confluence
+        uses: cupcakearmy/confluence-markdown-sync@v1
+        with:
+          from: '.github/workflows/upload_github_files_to_confluence.yml'
+          to: '891098311'
+          cloud: 'https://confluence.pyrsoftware.ca/confluence/rest/api'
+          user: 
+          token: 
