@@ -4,11 +4,6 @@ permissions:
   id-token: write # required to use OIDC authentication
 
 on:
-  schedule:
-    - cron: "0 0 * * *" # you can edit this per your requirements
-  push:
-    branches:
-      - 'main' #add the branch name
   workflow_dispatch:
 
 env:
@@ -19,15 +14,17 @@ env:
   CONFLUENCE_PAGE_ID: 891098311
 
 jobs:
-  runs-on: ubuntu-latest
-    - name: Checkout this repository
-      uses: actions/checkout@v4
+  Build:
+     runs-on: ubuntu-latest
+     steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
     
-    - name: Uploads file to Confluence
-      uses: cupcakearmy/confluence-markdown-sync@v1
-      with:
-        from: '.github/workflows/upload_github_files_to_confluence.yml'
-        to: '891098311'
-        cloud: 'https://confluence.pyrsoftware.ca/confluence/rest/api'
-        user: ${{ secrets.CONFLUENCE_EMAIL }}
-        token: ${{ secrets.CONFLUENCE_TOKEN }}
+      - name: Uploads file to Confluence
+        uses: cupcakearmy/confluence-markdown-sync@v1
+        with:
+          from: '.github/workflows/upload_github_files_to_confluence.yml'
+          to: '891098311'
+          cloud: 'https://confluence.pyrsoftware.ca/confluence/rest/api'
+          user: ${{ secrets.CONFLUENCE_EMAIL }}
+          token: ${{ secrets.CONFLUENCE_TOKEN }}
