@@ -21,10 +21,10 @@ jobs:
         uses: actions/checkout@v4
     
       - name: Uploads file to Confluence
-        uses: cupcakearmy/confluence-markdown-sync@v1
+        uses: markdown-confluence/publish@v1
         with:
           from: '.github/workflows/upload_github_files_to_confluence.yaml'
-          to: '891098311'
-          cloud: https://confluence.pyrsoftware.ca/confluence/rest/api
+          to: 891098311
+          cloud: confluence.pyrsoftware.ca/confluence/rest/api
           user: ${{ secrets.CONFLUENCE_EMAIL }}
           token: ${{ secrets.CONFLUENCE_TOKEN }}
